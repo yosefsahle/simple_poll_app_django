@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ poll.title }}</title>
+</head>
+<body>
+    <h1>{{ poll.title }}</h1>
+    <p>{{ poll.description }}</p>
+    <ul>
+        {% for question in poll.question_set.all %}
+            <li>{{ question.question_text }}
+                <ul>
+                    {% for choice in question.choice_set.all %}
+                        <li>{{ choice.choice_text }} - {{ choice.votes }} votes</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'poll_vote' poll.id %}">Vote</a>
+</body>
+</html>
